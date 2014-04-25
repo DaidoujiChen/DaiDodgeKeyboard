@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  DaiDodgeKeyboard
 //
 //  Created by 啟倫 陳 on 2014/4/25.
@@ -8,6 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MainViewController : UIViewController <UITextFieldDelegate>
 @end

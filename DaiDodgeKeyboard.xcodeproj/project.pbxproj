@@ -13,14 +13,17 @@
 		01054FA4190A0361008FC95F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01054FA2190A0361008FC95F /* InfoPlist.strings */; };
 		01054FA6190A0361008FC95F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01054FA5190A0361008FC95F /* main.m */; };
 		01054FAA190A0361008FC95F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01054FA9190A0361008FC95F /* AppDelegate.m */; };
-		01054FAD190A0361008FC95F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01054FAB190A0361008FC95F /* Main.storyboard */; };
-		01054FB0190A0361008FC95F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01054FAF190A0361008FC95F /* ViewController.m */; };
 		01054FB2190A0361008FC95F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01054FB1190A0361008FC95F /* Images.xcassets */; };
 		01054FB9190A0361008FC95F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01054FB8190A0361008FC95F /* XCTest.framework */; };
 		01054FBA190A0361008FC95F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01054F99190A0360008FC95F /* Foundation.framework */; };
 		01054FBB190A0361008FC95F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01054F9D190A0360008FC95F /* UIKit.framework */; };
 		01054FC3190A0361008FC95F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01054FC1190A0361008FC95F /* InfoPlist.strings */; };
 		01054FC5190A0361008FC95F /* DaiDodgeKeyboardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01054FC4190A0361008FC95F /* DaiDodgeKeyboardTests.m */; };
+		01054FD1190A03C1008FC95F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01054FCF190A03C1008FC95F /* MainViewController.m */; };
+		01054FD2190A03C1008FC95F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01054FD0190A03C1008FC95F /* MainViewController.xib */; };
+		01054FD6190A0556008FC95F /* DaiDodgeKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 01054FD5190A0556008FC95F /* DaiDodgeKeyboard.m */; };
+		01054FD9190A05F2008FC95F /* DaiDodgeKeyboard+AccessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 01054FD8190A05F2008FC95F /* DaiDodgeKeyboard+AccessObject.m */; };
+		01054FDC190A0AC1008FC95F /* UIView+FindFirstResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 01054FDB190A0AC1008FC95F /* UIView+FindFirstResponder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,15 +47,21 @@
 		01054FA7190A0361008FC95F /* DaiDodgeKeyboard-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DaiDodgeKeyboard-Prefix.pch"; sourceTree = "<group>"; };
 		01054FA8190A0361008FC95F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		01054FA9190A0361008FC95F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		01054FAC190A0361008FC95F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		01054FAE190A0361008FC95F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		01054FAF190A0361008FC95F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		01054FB1190A0361008FC95F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01054FB7190A0361008FC95F /* DaiDodgeKeyboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DaiDodgeKeyboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01054FB8190A0361008FC95F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		01054FC0190A0361008FC95F /* DaiDodgeKeyboardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DaiDodgeKeyboardTests-Info.plist"; sourceTree = "<group>"; };
 		01054FC2190A0361008FC95F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		01054FC4190A0361008FC95F /* DaiDodgeKeyboardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DaiDodgeKeyboardTests.m; sourceTree = "<group>"; };
+		01054FCE190A03C1008FC95F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		01054FCF190A03C1008FC95F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		01054FD0190A03C1008FC95F /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		01054FD4190A0556008FC95F /* DaiDodgeKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DaiDodgeKeyboard.h; path = DaiDodgeKeyboard/DaiDodgeKeyboard.h; sourceTree = "<group>"; };
+		01054FD5190A0556008FC95F /* DaiDodgeKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DaiDodgeKeyboard.m; path = DaiDodgeKeyboard/DaiDodgeKeyboard.m; sourceTree = "<group>"; };
+		01054FD7190A05F2008FC95F /* DaiDodgeKeyboard+AccessObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DaiDodgeKeyboard+AccessObject.h"; path = "DaiDodgeKeyboard/DaiDodgeKeyboard+AccessObject.h"; sourceTree = "<group>"; };
+		01054FD8190A05F2008FC95F /* DaiDodgeKeyboard+AccessObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DaiDodgeKeyboard+AccessObject.m"; path = "DaiDodgeKeyboard/DaiDodgeKeyboard+AccessObject.m"; sourceTree = "<group>"; };
+		01054FDA190A0AC1008FC95F /* UIView+FindFirstResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+FindFirstResponder.h"; path = "DaiDodgeKeyboard/UIView+FindFirstResponder.h"; sourceTree = "<group>"; };
+		01054FDB190A0AC1008FC95F /* UIView+FindFirstResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FindFirstResponder.m"; path = "DaiDodgeKeyboard/UIView+FindFirstResponder.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,11 +121,12 @@
 		01054F9F190A0360008FC95F /* DaiDodgeKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				01054FD3190A04C1008FC95F /* DaiDodgeKeyboard */,
 				01054FA8190A0361008FC95F /* AppDelegate.h */,
 				01054FA9190A0361008FC95F /* AppDelegate.m */,
-				01054FAB190A0361008FC95F /* Main.storyboard */,
-				01054FAE190A0361008FC95F /* ViewController.h */,
-				01054FAF190A0361008FC95F /* ViewController.m */,
+				01054FCE190A03C1008FC95F /* MainViewController.h */,
+				01054FCF190A03C1008FC95F /* MainViewController.m */,
+				01054FD0190A03C1008FC95F /* MainViewController.xib */,
 				01054FB1190A0361008FC95F /* Images.xcassets */,
 				01054FA0190A0361008FC95F /* Supporting Files */,
 			);
@@ -150,6 +160,19 @@
 				01054FC1190A0361008FC95F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		01054FD3190A04C1008FC95F /* DaiDodgeKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				01054FD4190A0556008FC95F /* DaiDodgeKeyboard.h */,
+				01054FD5190A0556008FC95F /* DaiDodgeKeyboard.m */,
+				01054FD7190A05F2008FC95F /* DaiDodgeKeyboard+AccessObject.h */,
+				01054FD8190A05F2008FC95F /* DaiDodgeKeyboard+AccessObject.m */,
+				01054FDA190A0AC1008FC95F /* UIView+FindFirstResponder.h */,
+				01054FDB190A0AC1008FC95F /* UIView+FindFirstResponder.m */,
+			);
+			name = DaiDodgeKeyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,8 +252,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				01054FB2190A0361008FC95F /* Images.xcassets in Resources */,
+				01054FD2190A03C1008FC95F /* MainViewController.xib in Resources */,
 				01054FA4190A0361008FC95F /* InfoPlist.strings in Resources */,
-				01054FAD190A0361008FC95F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,9 +272,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01054FB0190A0361008FC95F /* ViewController.m in Sources */,
 				01054FAA190A0361008FC95F /* AppDelegate.m in Sources */,
+				01054FDC190A0AC1008FC95F /* UIView+FindFirstResponder.m in Sources */,
+				01054FD1190A03C1008FC95F /* MainViewController.m in Sources */,
+				01054FD9190A05F2008FC95F /* DaiDodgeKeyboard+AccessObject.m in Sources */,
 				01054FA6190A0361008FC95F /* main.m in Sources */,
+				01054FD6190A0556008FC95F /* DaiDodgeKeyboard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,14 +306,6 @@
 				01054FA3190A0361008FC95F /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		01054FAB190A0361008FC95F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				01054FAC190A0361008FC95F /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		01054FC1190A0361008FC95F /* InfoPlist.strings */ = {
