@@ -31,8 +31,8 @@
             [DaiDodgeKeyboard changeFirstResponder:self];
         }
     }
-    
     return [self swizzling_becomeFirstResponder];
+    
 }
 
 #pragma mark - private method

@@ -12,6 +12,8 @@
 
 @implementation DaiDodgeKeyboard (Animation)
 
+#pragma mark - class method
+
 +(void) changeFirstResponder : (UIView*) newFirstResponderView {
     if ([self isKeyboardShow]) {
         [self dodgeNewView:newFirstResponderView];
@@ -49,6 +51,8 @@
     }
     
 }
+
+#pragma mark - private
 
 +(void) dodgeNewView : (UIView*) newView {
 
