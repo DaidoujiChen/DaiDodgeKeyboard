@@ -11,9 +11,11 @@
 @implementation DaiDodgeKeyboard (AccessObject)
 
 static const char OBSERVERVIEWPOINTER;
+static const char FIRSTRESPONDERVIEWPOINTER;
 static const char ORIGINALVIEWFRAMEPOINTER;
 static const char KEYBOARDRECTPOINTER;
 static const char KEYBOARDANIMATIONDUTATIONPOINTER;
+static const char ISKEYBOARDSHOWPOINTER;
 
 +(void) setObserverView : (UIView*) observerView {
     objc_setAssociatedObject(self, &OBSERVERVIEWPOINTER, observerView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -21,6 +23,14 @@ static const char KEYBOARDANIMATIONDUTATIONPOINTER;
 
 +(UIView*) observerView {
     return objc_getAssociatedObject(self, &OBSERVERVIEWPOINTER);
+}
+
++(void) setFristResponderView : (UIView*) firstResponderView {
+    objc_setAssociatedObject(self, &FIRSTRESPONDERVIEWPOINTER, firstResponderView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
++(UIView*) firstResponderView {
+    return objc_getAssociatedObject(self, &FIRSTRESPONDERVIEWPOINTER);
 }
 
 +(void) setOriginalViewFrame : (CGRect) originalViewFrame {
@@ -45,6 +55,14 @@ static const char KEYBOARDANIMATIONDUTATIONPOINTER;
 
 +(double) keyboardAnimationDutation {
     return [objc_getAssociatedObject(self, &KEYBOARDANIMATIONDUTATIONPOINTER) floatValue];
+}
+
++(void) setIsKeyboardShow : (BOOL) isKeyboardShow {
+    objc_setAssociatedObject(self, &ISKEYBOARDSHOWPOINTER, [NSNumber numberWithBool:isKeyboardShow], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
++(BOOL) isKeyboardShow {
+    return [objc_getAssociatedObject(self, &ISKEYBOARDSHOWPOINTER) boolValue];
 }
 
 @end

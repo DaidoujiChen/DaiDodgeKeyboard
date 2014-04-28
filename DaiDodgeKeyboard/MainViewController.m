@@ -19,6 +19,17 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - UITextViewDelegate
+
+-(BOOL) textView : (UITextView*) textView shouldChangeTextInRange : (NSRange) range replacementText : (NSString*) text {
+    if([text isEqualToString:@"\n"]){
+        [textView resignFirstResponder];
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
 #pragma mark - UITextFieldDelegate
 
 -(BOOL) textFieldShouldReturn : (UITextField*) textField {
@@ -36,7 +47,7 @@
             [(UITextField*)v setDelegate:self];
         }
     }
-    
+
     [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
     
 }

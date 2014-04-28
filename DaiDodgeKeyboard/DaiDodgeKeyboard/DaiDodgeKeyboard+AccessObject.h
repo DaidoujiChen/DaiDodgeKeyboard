@@ -15,6 +15,9 @@
 +(void) setObserverView : (UIView*) observerView;
 +(UIView*) observerView;
 
++(void) setFristResponderView : (UIView*) firstResponderView;
++(UIView*) firstResponderView;
+
 +(void) setOriginalViewFrame : (CGRect) originalViewFrame;
 +(CGRect) originalViewFrame;
 
@@ -23,5 +26,8 @@
 
 +(void) setKeyboardAnimationDutation : (double) keyboardAnimationDutation;
 +(double) keyboardAnimationDutation;
+
++(void) setIsKeyboardShow : (BOOL) isKeyboardShow;
++(BOOL) isKeyboardShow;
 
 @end

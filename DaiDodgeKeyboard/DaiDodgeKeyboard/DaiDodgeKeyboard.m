@@ -8,9 +8,9 @@
 
 #import "DaiDodgeKeyboard.h"
 
-#import "UIView+FindFirstResponder.h"
-
+#import "UIView+FirstResponderNotify.h"
 #import "DaiDodgeKeyboard+AccessObject.h"
+#import "DaiDodgeKeyboard+Animation.h"
 
 @interface DaiDodgeKeyboard ()
 +(void) keyboardWillShow : (NSNotification*) notification;
@@ -19,62 +19,25 @@
 
 @implementation DaiDodgeKeyboard
 
-static const void *observObjectContext;
-
 #pragma mark - private
-
-+(void) findFirstResponderAndDodgeKeyboard {
-    
-    UIView *currentResponder = [[self observerView] findFirstResponder];
-    
-    if (currentResponder != nil) {
-        
-        CGRect currentKeyboardRect = [[self observerView] convertRect:[self keyboardRect]
-                                                             fromView:nil];
-        
-        CGPoint objectLeftBottom = [currentResponder convertPoint:CGPointMake(0, currentResponder.frame.size.height)
-                                                           toView:[self observerView]];
-        
-        float shiftHeight = objectLeftBottom.y - currentKeyboardRect.origin.y;
-        
-        if (shiftHeight > 0) {
-            [UIView animateWithDuration:[self keyboardAnimationDutation]
-                             animations:^{
-                                 CGRect newFrame = [self observerView].frame;
-                                 newFrame.origin.y = 0 - shiftHeight;
-                                 [[self observerView] setFrame:newFrame];
-                             }];
-        } else {
-            [UIView animateWithDuration:[self keyboardAnimationDutation]
-                             animations:^{
-                                 [[self observerView] setFrame:[self originalViewFrame]];
-                             }];
-        }
-    }
-}
 
 +(void) keyboardWillShow : (NSNotification*) notification {
     
-    [NSObject cancelPreviousPerformRequestsWithTarget:(NSObject*)self
-                                             selector:@selector(findFirstResponderAndDodgeKeyboard)
-                                               object:nil];
+    [self setIsKeyboardShow:YES];
     
     NSDictionary *userInfo = [notification userInfo];
     
     [self setKeyboardAnimationDutation:[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
     [self setKeyboardRect:[[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue]];
 
-    [self findFirstResponderAndDodgeKeyboard];
+    [self dodgeKeyboardAnimation];
 }
 
 +(void) keyboardWillHide : (NSNotification*) notification {
     
-    NSDictionary *userInfo = [notification userInfo];
+    [self setIsKeyboardShow:NO];
     
-    [UIView animateWithDuration:[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]
-                     animations:^{
-                         [[self observerView] setFrame:[self originalViewFrame]];
-                     }];
+    [self dodgeKeyboardAnimation];
 }
 
 #pragma mark - class method
@@ -83,6 +46,7 @@ static const void *observObjectContext;
     
     [self setObserverView:view];
     [self setOriginalViewFrame:view.frame];
+    [self setIsKeyboardShow:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
