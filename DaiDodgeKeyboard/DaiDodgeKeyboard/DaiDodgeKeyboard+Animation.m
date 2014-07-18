@@ -29,7 +29,7 @@
 
     CGRect currentKeyboardRect = [[self observerView] convertRect:[self keyboardRect]
                                                          fromView:nil];
-    
+
     CGPoint objectLeftBottom = [currentFirstResponder convertPoint:CGPointMake(0, currentFirstResponder.frame.size.height)
                                                             toView:[self observerView]];
     
@@ -40,7 +40,7 @@
         [UIView animateWithDuration:[self keyboardAnimationDutation]
                          animations:^{
                              CGRect newFrame = [self observerView].frame;
-                             newFrame.origin.y = 0 - shiftHeight;
+                             newFrame.origin.y = [self observerView].frame.origin.y - shiftHeight;
                              [[self observerView] setFrame:newFrame];
                          }];
     } else {
@@ -61,13 +61,13 @@
 
     CGPoint newObjectLeftBottom = [newView convertPoint:CGPointMake(0, newView.frame.size.height)
                                                  toView:[self observerView]];
-    
+
     float newShiftHeight = newObjectLeftBottom.y - currentKeyboardRect.origin.y;
-    
+
     CGRect newFrame = [self observerView].frame;
-    
-    if (newFrame.origin.y - newShiftHeight < 0) {
-        
+
+    if (newFrame.origin.y - newShiftHeight < [self originalViewFrame].origin.y) {
+
         [UIView animateWithDuration:[self keyboardAnimationDutation]
                          animations:^{
                              CGRect newFrame = [self observerView].frame;
@@ -76,7 +76,7 @@
                          }];
         
     } else {
-        
+
         [UIView animateWithDuration:[self keyboardAnimationDutation]
                          animations:^{
                              [[self observerView] setFrame:[self originalViewFrame]];
