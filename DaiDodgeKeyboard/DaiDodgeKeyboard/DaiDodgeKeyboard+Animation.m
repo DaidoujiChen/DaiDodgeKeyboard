@@ -33,8 +33,13 @@
     CGPoint objectLeftBottom = [currentFirstResponder convertPoint:CGPointMake(0, currentFirstResponder.frame.size.height)
                                                             toView:[self observerView]];
     
+    //workaround for uitextview
+    if ([currentFirstResponder isKindOfClass:[UITextView class]]) {
+        UITextView *textView = (UITextView*) currentFirstResponder;
+        objectLeftBottom.y += textView.contentOffset.y;
+    }
+    
     float shiftHeight = objectLeftBottom.y - currentKeyboardRect.origin.y;
-
     
     if (shiftHeight > 0) {
         [UIView animateWithDuration:[self keyboardAnimationDutation]
@@ -61,6 +66,12 @@
 
     CGPoint newObjectLeftBottom = [newView convertPoint:CGPointMake(0, newView.frame.size.height)
                                                  toView:[self observerView]];
+    
+    //workaround for uitextview
+    if ([newView isKindOfClass:[UITextView class]]) {
+        UITextView *textView = (UITextView*) newView;
+        newObjectLeftBottom.y += textView.contentOffset.y;
+    }
 
     float newShiftHeight = newObjectLeftBottom.y - currentKeyboardRect.origin.y;
 
