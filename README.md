@@ -3,7 +3,7 @@ DaiDodgeKeyboard
 
 Let your textfield / textview automatic dodge your keyboard.
 
-![image](https://s3-ap-northeast-1.amazonaws.com/daidoujiminecraft/Daidouji/DaiDodgeKeyboard20140428.gif)
+![image](https://s3-ap-northeast-1.amazonaws.com/daidoujiminecraft/Daidouji/DaiDodgeKeyboard.gif)
 
 DaidoujiChen
 
