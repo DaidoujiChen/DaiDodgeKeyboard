@@ -10,24 +10,10 @@
 
 #import <objc/runtime.h>
 
+#import "DaiDodgeKeyboardObjects.h"
+
 @interface DaiDodgeKeyboard (AccessObject)
 
-+(void) setObserverView : (UIView*) observerView;
-+(UIView*) observerView;
-
-+(void) setFristResponderView : (UIView*) firstResponderView;
-+(UIView*) firstResponderView;
-
-+(void) setOriginalViewFrame : (CGRect) originalViewFrame;
-+(CGRect) originalViewFrame;
-
-+(void) setKeyboardRect : (CGRect) keyboardRect;
-+(CGRect) keyboardRect;
-
-+(void) setKeyboardAnimationDutation : (double) keyboardAnimationDutation;
-+(double) keyboardAnimationDutation;
-
-+(void) setIsKeyboardShow : (BOOL) isKeyboardShow;
-+(BOOL) isKeyboardShow;
++ (DaiDodgeKeyboardObjects *)objects;
 
 @end

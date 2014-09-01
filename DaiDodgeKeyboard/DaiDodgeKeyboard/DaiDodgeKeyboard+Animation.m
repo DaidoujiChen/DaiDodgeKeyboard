@@ -14,88 +14,74 @@
 
 #pragma mark - class method
 
-+(void) changeFirstResponder : (UIView*) newFirstResponderView {
-    if ([self isKeyboardShow]) {
-        [self dodgeNewView:newFirstResponderView];
-        [self setFristResponderView:newFirstResponderView];
-    } else {
-        [self setFristResponderView:newFirstResponderView];
-    }
++ (void)changeFirstResponder:(UIView *)newFirstResponderView
+{
+	if ([self objects].isKeyboardShow) {
+		[self dodgeNewView:newFirstResponderView];
+		[self objects].firstResponderView = newFirstResponderView;
+	} else {
+		[self objects].firstResponderView = newFirstResponderView;
+	}
 }
 
-+(void) dodgeKeyboardAnimation {
++ (void)dodgeKeyboardAnimation
+{
+	UIView *currentFirstResponder = [self objects].firstResponderView;
+	CGRect currentKeyboardRect = [[self objects].observerView convertRect:[self objects].keyboardFrame fromView:nil];
+	CGPoint objectLeftBottom = [currentFirstResponder convertPoint:CGPointMake(0, currentFirstResponder.frame.size.height) toView:[self objects].observerView];
     
-    UIView *currentFirstResponder = [self firstResponderView];
-
-    CGRect currentKeyboardRect = [[self observerView] convertRect:[self keyboardRect]
-                                                         fromView:nil];
-
-    CGPoint objectLeftBottom = [currentFirstResponder convertPoint:CGPointMake(0, currentFirstResponder.frame.size.height)
-                                                            toView:[self observerView]];
+	//workaround for uitextview
+	if ([currentFirstResponder isKindOfClass:[UITextView class]]) {
+		UITextView *textView = (UITextView *)currentFirstResponder;
+		objectLeftBottom.y += textView.contentOffset.y;
+	}
     
-    //workaround for uitextview
-    if ([currentFirstResponder isKindOfClass:[UITextView class]]) {
-        UITextView *textView = (UITextView*) currentFirstResponder;
-        objectLeftBottom.y += textView.contentOffset.y;
-    }
+	float shiftHeight = objectLeftBottom.y - currentKeyboardRect.origin.y;
     
-    float shiftHeight = objectLeftBottom.y - currentKeyboardRect.origin.y;
-    
-    if (shiftHeight > 0) {
-        [UIView animateWithDuration:[self keyboardAnimationDutation]
-                         animations:^{
-                             CGRect newFrame = [self observerView].frame;
-                             newFrame.origin.y = [self observerView].frame.origin.y - shiftHeight;
-                             [[self observerView] setFrame:newFrame];
+	if (shiftHeight > 0) {
+		[UIView animateWithDuration:[self objects].keyboardAnimationDutation
+		                 animations: ^{
+                             CGRect newFrame = [self objects].observerView.frame;
+                             newFrame.origin.y = [self objects].observerView.frame.origin.y - shiftHeight;
+                             [self objects].observerView.frame = newFrame;
                          }];
-    } else {
-        [UIView animateWithDuration:[self keyboardAnimationDutation]
-                         animations:^{
-                             [[self observerView] setFrame:[self originalViewFrame]];
+	} else {
+		[UIView animateWithDuration:[self objects].keyboardAnimationDutation
+		                 animations: ^{
+                             [self objects].observerView.frame = [self objects].originalViewFrame;
                          }];
-    }
-    
+	}
 }
 
 #pragma mark - private
 
-+(void) dodgeNewView : (UIView*) newView {
-
-    CGRect currentKeyboardRect = [[self observerView] convertRect:[self keyboardRect]
-                                                         fromView:nil];
-
-    CGPoint newObjectLeftBottom = [newView convertPoint:CGPointMake(0, newView.frame.size.height)
-                                                 toView:[self observerView]];
++ (void)dodgeNewView:(UIView *)newView
+{
+	CGRect currentKeyboardRect = [[self objects].observerView convertRect:[self objects].keyboardFrame fromView:nil];
+	CGPoint newObjectLeftBottom = [newView convertPoint:CGPointMake(0, newView.frame.size.height) toView:[self objects].observerView];
     
-    //workaround for uitextview
-    if ([newView isKindOfClass:[UITextView class]]) {
-        UITextView *textView = (UITextView*) newView;
-        newObjectLeftBottom.y += textView.contentOffset.y;
-    }
-
-    float newShiftHeight = newObjectLeftBottom.y - currentKeyboardRect.origin.y;
-
-    CGRect newFrame = [self observerView].frame;
-
-    if (newFrame.origin.y - newShiftHeight < [self originalViewFrame].origin.y) {
-
-        [UIView animateWithDuration:[self keyboardAnimationDutation]
-                         animations:^{
-                             CGRect newFrame = [self observerView].frame;
+	//workaround for uitextview
+	if ([newView isKindOfClass:[UITextView class]]) {
+		UITextView *textView = (UITextView *)newView;
+		newObjectLeftBottom.y += textView.contentOffset.y;
+	}
+    
+	float newShiftHeight = newObjectLeftBottom.y - currentKeyboardRect.origin.y;
+	CGRect newFrame = [self objects].observerView.frame;
+    
+	if (newFrame.origin.y - newShiftHeight < [self objects].originalViewFrame.origin.y) {
+		[UIView animateWithDuration:[self objects].keyboardAnimationDutation
+		                 animations: ^{
+                             CGRect newFrame = [self objects].observerView.frame;
                              newFrame.origin.y -= newShiftHeight;
-                             [[self observerView] setFrame:newFrame];
+                             [self objects].observerView.frame = newFrame;
                          }];
-        
-    } else {
-
-        [UIView animateWithDuration:[self keyboardAnimationDutation]
-                         animations:^{
-                             [[self observerView] setFrame:[self originalViewFrame]];
+	} else {
+		[UIView animateWithDuration:[self objects].keyboardAnimationDutation
+		                 animations: ^{
+                             [self objects].observerView.frame = [self objects].originalViewFrame;
                          }];
-        
-    }
-    
+	}
 }
-
 
 @end

@@ -10,7 +10,7 @@
 
 @interface DaiDodgeKeyboard (Animation)
 
-+(void) changeFirstResponder : (UIView*) newFirstResponderView;
-+(void) dodgeKeyboardAnimation;
++ (void)changeFirstResponder:(UIView *)newFirstResponderView;
++ (void)dodgeKeyboardAnimation;
 
 @end

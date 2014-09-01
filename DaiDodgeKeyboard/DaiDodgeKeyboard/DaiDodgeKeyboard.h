@@ -10,7 +10,7 @@
 
 @interface DaiDodgeKeyboard : NSObject
 
-+(void) addRegisterTheViewNeedDodgeKeyboard : (UIView*) view;
-+(void) removeRegisterTheViewNeedDodgeKeyboard;
++ (void)addRegisterTheViewNeedDodgeKeyboard:(UIView *)view;
++ (void)removeRegisterTheViewNeedDodgeKeyboard;
 
 @end

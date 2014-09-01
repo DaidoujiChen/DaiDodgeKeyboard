@@ -14,10 +14,10 @@
 
 @interface DaiDodgeKeyboard ()
 
-+(void) keyboardWillShow : (NSNotification*) notification;
-+(void) keyboardWillHide : (NSNotification*) notification;
-+(void) addObservers;
-+(void) removeObservers;
++ (void)keyboardWillShow:(NSNotification *)notification;
++ (void)keyboardWillHide:(NSNotification *)notification;
++ (void)addObservers;
++ (void)removeObservers;
 
 @end
 
@@ -25,63 +25,47 @@
 
 #pragma mark - private
 
-+(void) keyboardWillShow : (NSNotification*) notification {
-    
-    [self setIsKeyboardShow:YES];
-    
-    NSDictionary *userInfo = [notification userInfo];
-    [self setKeyboardAnimationDutation:[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
-    [self setKeyboardRect:[[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue]];
-    
-    [self dodgeKeyboardAnimation];
-    
++ (void)keyboardWillShow:(NSNotification *)notification
+{
+    [self objects].isKeyboardShow = YES;
+	NSDictionary *userInfo = [notification userInfo];
+    [self objects].keyboardAnimationDutation = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [self objects].keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	[self dodgeKeyboardAnimation];
 }
 
-+(void) keyboardWillHide : (NSNotification*) notification {
-    
-    [self setIsKeyboardShow:NO];
-    [self dodgeKeyboardAnimation];
-    
++ (void)keyboardWillHide:(NSNotification *)notification
+{
+    [self objects].isKeyboardShow = NO;
+	[self dodgeKeyboardAnimation];
 }
 
-+(void) addObservers {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
++ (void)addObservers
+{
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
-+(void) removeObservers {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
++ (void)removeObservers
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - class method
 
-+(void) addRegisterTheViewNeedDodgeKeyboard : (UIView*) view {
-    
-    [self setObserverView:view];
-    [self setOriginalViewFrame:view.frame];
-    [self setIsKeyboardShow:NO];
-    
-    [self addObservers];
-    
++ (void)addRegisterTheViewNeedDodgeKeyboard:(UIView *)view
+{
+    [self objects].observerView = view;
+    [self objects].originalViewFrame = view.frame;
+    [self objects].isKeyboardShow = NO;
+	[self addObservers];
 }
 
-+(void) removeRegisterTheViewNeedDodgeKeyboard {
-    
-    objc_removeAssociatedObjects(self);
-    
-    [self removeObservers];
-    
++ (void)removeRegisterTheViewNeedDodgeKeyboard
+{
+	objc_removeAssociatedObjects(self);    
+	[self removeObservers];
 }
 
 @end
