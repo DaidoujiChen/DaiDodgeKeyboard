@@ -13,6 +13,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [MainViewController new];
+    
+    /*if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+        [application setStatusBarStyle:UIStatusBarStyleLightContent];
+        self.window.clipsToBounds = YES;
+        self.window.frame =  CGRectMake(0, 20, self.window.frame.size.width, self.window.frame.size.height-20);
+    }*/
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

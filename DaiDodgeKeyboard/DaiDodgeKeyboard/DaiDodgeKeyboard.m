@@ -31,6 +31,14 @@
 	NSDictionary *userInfo = [notification userInfo];
     [self objects].keyboardAnimationDutation = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [self objects].keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    //get UITextEffectsWindow
+    for (UIWindow *eachWindow in [UIApplication sharedApplication].windows) {
+        if ([eachWindow isKindOfClass:NSClassFromString(@"UITextEffectsWindow")]) {
+            [self objects].textEffectsWindow = eachWindow;
+        }
+    }
+    
 	[self dodgeKeyboardAnimation];
 }
 
