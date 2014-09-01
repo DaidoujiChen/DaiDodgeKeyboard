@@ -99,7 +99,8 @@
 {
 	NSMutableArray *returnArray = [NSMutableArray array];
 	for (UIView *eachView in self.view.subviews) {
-		if ([eachView respondsToSelector:@selector(setText:)]) {
+		//if ([eachView respondsToSelector:@selector(setText:)]) {
+        if ([eachView isKindOfClass:[UITextView class]]) {
 			[returnArray addObject:eachView];
 		}
 	}
@@ -113,7 +114,8 @@
 	[super viewDidLoad];
 	UIToolbar *toolBar = [self createToolbar];
 	for (UIView *v in self.view.subviews) {
-		if ([v respondsToSelector:@selector(setText:)]) {
+		//if ([v respondsToSelector:@selector(setText:)]) {
+        if ([v isKindOfClass:[UITextView class]]) {
 			[v performSelector:@selector(setDelegate:) withObject:self];
 			[v performSelector:@selector(setInputAccessoryView:) withObject:toolBar];
 		}

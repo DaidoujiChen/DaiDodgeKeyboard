@@ -27,19 +27,29 @@
 
 + (void)keyboardWillShow:(NSNotification *)notification
 {
-    [self objects].isKeyboardShow = YES;
-	NSDictionary *userInfo = [notification userInfo];
-    [self objects].keyboardAnimationDutation = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    [self objects].keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    //get UITextEffectsWindow
-    for (UIWindow *eachWindow in [UIApplication sharedApplication].windows) {
-        if ([eachWindow isKindOfClass:NSClassFromString(@"UITextEffectsWindow")]) {
-            [self objects].textEffectsWindow = eachWindow;
+    //第一次看到鍵盤
+    if (![self objects].isKeyboardShow) {
+        [self objects].isKeyboardShow = YES;
+        NSDictionary *userInfo = [notification userInfo];
+        [self objects].keyboardAnimationDutation = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        [self objects].keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        
+        //get UITextEffectsWindow
+        for (UIWindow *eachWindow in [UIApplication sharedApplication].windows) {
+            if ([eachWindow isKindOfClass:NSClassFromString(@"UITextEffectsWindow")]) {
+                [self objects].textEffectsWindow = eachWindow;
+            }
         }
+    [self dodgeKeyboardAnimation];
+        
+    //當鍵盤大小有變動時, 還會再進來一次
+    } else {
+        NSDictionary *userInfo = [notification userInfo];
+        [self objects].keyboardAnimationDutation = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        [self objects].keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        [self dodgeKeyboardAnimation];
     }
     
-	[self dodgeKeyboardAnimation];
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
