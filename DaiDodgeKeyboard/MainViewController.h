@@ -8,5 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate>
+#import "BlockAlertView.h"
+
+@interface MainViewController : UIViewController
 @end
