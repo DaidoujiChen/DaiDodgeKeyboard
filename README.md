@@ -23,7 +23,7 @@ daidoujichen@gmail.com
 
     [DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
     
-這樣一行, 他就會自動的在這個 view 裡面, 幫你的輸入框們自動的閃掉鍵盤, 就這樣, 沒別的了,
+這樣一行, 他就會自動的在這個 view 裡面, 幫你的輸入框們自動的閃掉鍵盤**(有一個重點, 這邊設定的這個 view, 將會是你希望上移的那個 view)**, 就這樣, 沒別的了,
 然後在結束的地方幫他加上
 
     [DaiDodgeKeyboard removeRegisterTheViewNeedDodgeKeyboard];
