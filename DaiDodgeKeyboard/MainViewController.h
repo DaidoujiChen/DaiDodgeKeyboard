@@ -8,5 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate>
+#import "DodgeCell.h"
+
+@interface MainViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *dodgeTableView;
+
 @end

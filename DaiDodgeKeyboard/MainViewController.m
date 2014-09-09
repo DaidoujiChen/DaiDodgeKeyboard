@@ -25,13 +25,6 @@
 @end
 
 @interface MainViewController ()
-
-- (UIToolbar *)createToolbar;
-- (void)nextTextField;
-- (void)prevTextField;
-- (void)textFieldDone;
-- (NSArray *)inputViews;
-
 @end
 
 @implementation MainViewController
@@ -56,55 +49,41 @@
 	return YES;
 }
 
-#pragma mark - private
+#pragma mark - UITableViewDataSource
 
-- (UIToolbar *)createToolbar
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	UIToolbar *toolBar = [UIToolbar new];
-	UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(nextTextField)];
-	UIBarButtonItem *prevButton = [[UIBarButtonItem alloc] initWithTitle:@"Prev" style:UIBarButtonItemStylePlain target:self action:@selector(prevTextField)];
-	UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(textFieldDone)];
-	toolBar.items = @[prevButton, nextButton, space, done];
-    [toolBar sizeToFit];
-	return toolBar;
+    return 50;
 }
 
-- (void)nextTextField
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSUInteger currentIndex = [[self inputViews] indexOfObject:[self.view findFirstResponder]];
-	NSUInteger nextIndex = currentIndex + 1;
-	nextIndex += [[self inputViews] count];
-	nextIndex %= [[self inputViews] count];
-	UITextField *nextTextField = [[self inputViews] objectAtIndex:nextIndex];
-	[nextTextField becomeFirstResponder];
+    static NSString *cellIdentifier = @"DodgeCell";
+    DodgeCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    if (indexPath.row%2) {
+        cell.contentView.backgroundColor = [UIColor grayColor];
+    } else {
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+    }
+    cell.cellTextField.delegate = self;
+    return cell;
 }
 
-- (void)prevTextField
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSUInteger currentIndex = [[self inputViews] indexOfObject:[self.view findFirstResponder]];
-	NSUInteger prevIndex = currentIndex - 1;
-	prevIndex += [[self inputViews] count];
-	prevIndex %= [[self inputViews] count];
-	UITextField *nextTextField = [[self inputViews] objectAtIndex:prevIndex];
-	[nextTextField becomeFirstResponder];
+    return 75.0f;
 }
 
-- (void)textFieldDone
-{
-	[[self.view findFirstResponder] resignFirstResponder];
-}
+#pragma mark - UIScrollViewDelegate
 
-- (NSArray *)inputViews
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-	NSMutableArray *returnArray = [NSMutableArray array];
-	for (UIView *eachView in self.view.subviews) {
-		//if ([eachView respondsToSelector:@selector(setText:)]) {
-        if ([eachView isKindOfClass:[UITextView class]]) {
-			[returnArray addObject:eachView];
-		}
-	}
-	return returnArray;
+    UIView *firstResponderView = [self.view findFirstResponder];
+    if (firstResponderView) {
+        [firstResponderView resignFirstResponder];
+    }
 }
 
 #pragma mark - life cycle
@@ -112,15 +91,8 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	UIToolbar *toolBar = [self createToolbar];
-	for (UIView *v in self.view.subviews) {
-		//if ([v respondsToSelector:@selector(setText:)]) {
-        if ([v isKindOfClass:[UITextView class]]) {
-			[v performSelector:@selector(setDelegate:) withObject:self];
-			[v performSelector:@selector(setInputAccessoryView:) withObject:toolBar];
-		}
-	}
 	[DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
+    [self.dodgeTableView registerClass:[DodgeCell class] forCellReuseIdentifier:@"DodgeCell"];
 }
 
 @end
