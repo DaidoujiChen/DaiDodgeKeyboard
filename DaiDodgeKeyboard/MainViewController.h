@@ -9,4 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MainViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIScrollView *dodgeScrollView;
+
 @end

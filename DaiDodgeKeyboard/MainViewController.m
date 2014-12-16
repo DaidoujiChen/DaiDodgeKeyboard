@@ -123,4 +123,9 @@
 	[DaiDodgeKeyboard addRegisterTheViewNeedDodgeKeyboard:self.view];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.dodgeScrollView setContentSize:CGSizeMake(320, 1000)];
+}
+
 @end
