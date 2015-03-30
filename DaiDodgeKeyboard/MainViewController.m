@@ -114,8 +114,8 @@
 	[super viewDidLoad];
 	UIToolbar *toolBar = [self createToolbar];
 	for (UIView *v in self.view.subviews) {
-		//if ([v respondsToSelector:@selector(setText:)]) {
-        if ([v isKindOfClass:[UITextView class]]) {
+		if ([v respondsToSelector:@selector(setText:)]) {
+        //if ([v isKindOfClass:[UITextView class]]) {
 			[v performSelector:@selector(setDelegate:) withObject:self];
 			[v performSelector:@selector(setInputAccessoryView:) withObject:toolBar];
 		}

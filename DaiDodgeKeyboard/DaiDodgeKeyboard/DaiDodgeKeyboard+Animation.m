@@ -26,13 +26,13 @@
 
 + (void)dodgeKeyboardAnimation
 {
-	CGRect currentKeyboardFrame = [self currentKeyboardFrame];
+    CGFloat currentKeyboardHeight = MAX([self currentKeyboardFrame].origin.x, [self currentKeyboardFrame].origin.y);
     CGRect currentFirstResponderFrame = [self currentFirstResponderFrame:[self objects].firstResponderView];
     CGFloat viewFloor = currentFirstResponderFrame.origin.y + currentFirstResponderFrame.size.height;
-    BOOL isCrossOnKeyboard = (viewFloor >= currentKeyboardFrame.origin.y);
+    BOOL isCrossOnKeyboard = (viewFloor >= currentKeyboardHeight);
     
     if (isCrossOnKeyboard && [self objects].isKeyboardShow) {
-        CGFloat currentShift = viewFloor - currentKeyboardFrame.origin.y - [self objects].shiftHeight;
+        CGFloat currentShift = viewFloor - currentKeyboardHeight - [self objects].shiftHeight;
 
         [UIView animateWithDuration:[self objects].keyboardAnimationDutation animations: ^{
             CGRect newFrame = [self objects].observerView.frame;
@@ -56,13 +56,13 @@
 //做這個 method 的當下, 實際上的 view 已經被上移, 要以被上移的基礎上做考量
 + (void)dodgeNewView:(UIView *)newView
 {
-	CGRect currentKeyboardFrame = [self currentKeyboardFrame];
+	CGFloat currentKeyboardHeight = MAX([self currentKeyboardFrame].origin.x, [self currentKeyboardFrame].origin.y);
     CGRect currentFirstResponderFrame = [self currentFirstResponderFrame:newView];
     CGFloat viewFloor = currentFirstResponderFrame.origin.y + currentFirstResponderFrame.size.height;
-    BOOL isCrossOnKeyboard = (viewFloor >= currentKeyboardFrame.origin.y);
+    BOOL isCrossOnKeyboard = (viewFloor >= currentKeyboardHeight);
     
     if (isCrossOnKeyboard) {
-        CGFloat currentShift = viewFloor - currentKeyboardFrame.origin.y - [self objects].shiftHeight;
+        CGFloat currentShift = viewFloor - currentKeyboardHeight - [self objects].shiftHeight;
 
         [UIView animateWithDuration:[self objects].keyboardAnimationDutation animations: ^{
             CGRect newFrame = [self objects].observerView.frame;
